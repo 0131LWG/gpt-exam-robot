@@ -40,7 +40,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         groupCode
       };
     }
-    const data = await DictionaryItem.find(where, '_id name code parentId isEnable order remark')
+    const data = await DictionaryItem.find(
+      where,
+      '_id name code groupCode parentId isEnable order remark'
+    )
       .limit(pageSize)
       .skip((pageNum - 1) * pageSize);
 
