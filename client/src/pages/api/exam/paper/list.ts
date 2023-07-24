@@ -33,29 +33,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (keyword) {
       where = {
         name: {
-            $regex: `/${keyword}/i`
+          // $regex: `/${keyword}/i`
+          $regex: new RegExp(keyword, 'ig')
         }
-      }
+      };
     }
-    if(level) {
+    if (level) {
       where = {
         ...where,
         level
-      }
+      };
     }
 
-    if(categoryId) {
+    if (categoryId) {
       where = {
         ...where,
-        categoryId,
-      }
+        categoryId
+      };
     }
 
-    if(themeId) {
+    if (themeId) {
       where = {
         ...where,
-        themeId,
-      }
+        themeId
+      };
     }
     // if (keyword) {
     //   where = {
@@ -84,7 +85,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         total
       }
     });
-
   } catch (err) {
     jsonRes(res, {
       code: 500,
