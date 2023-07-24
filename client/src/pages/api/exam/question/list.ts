@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       pageSize: number;
     };
 
-    await authUser({req, authToken: true});
+    await authUser({ req, authToken: true });
 
     await connectToDatabase();
 
@@ -48,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       };
     }
 
-    console.log(where, "where");
+    console.log(where, 'where');
     const data = await ExamQuestion.find(
       where,
       '_id question answer categoryId themeId  remark createdAt createdBy updatedAt updatedBy'
@@ -57,8 +57,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .skip((pageNum - 1) * pageSize);
 
     const total = await ExamQuestion.countDocuments(where);
-    console.log(data, 'data')
-    console.log(total, 'total')
+    console.log(data, 'data');
+    console.log(total, 'total');
     jsonRes<PagingData<any>>(res, {
       data: {
         pageNum: pageNum,
@@ -67,7 +67,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         total
       }
     });
-
   } catch (err) {
     jsonRes(res, {
       code: 500,

@@ -10,27 +10,27 @@ const ExamAnswerSchema = new Schema({
     ref: 'examquestion'
   },
   answerContent: {
-    type: String,
+    type: String
   },
   gptContent: {
-    type: String,
+    type: String
   },
   score: {
-    type: Number,
+    type: Number
   },
   remark: {
-    type: String,
+    type: String
   },
-  isDeleted:{
+  isDeleted: {
     type: Boolean,
-    default: false,
+    default: false
   },
   createdAt: {
     type: Date,
     default: () => new Date()
   },
   updatedAt: {
-    type: Date,
+    type: Date
   },
   createdBy: {
     type: Schema.Types.ObjectId,
@@ -39,7 +39,8 @@ const ExamAnswerSchema = new Schema({
   updatedBy: {
     type: Schema.Types.ObjectId,
     ref: 'user'
-  },
+  }
 });
 
-export const ExamAnswer: Model<ExamAnswerModelSchema> = models['examanswer'] || model('examanswer', ExamAnswerSchema);
+export const ExamAnswer: Model<ExamAnswerModelSchema> =
+  models['examanswer'] || model('examanswer', ExamAnswerSchema);

@@ -2,24 +2,24 @@ import { Schema, model, models, Model } from 'mongoose';
 import { DictionaryGroupModelSchema } from '@/types/mongoSchema';
 const DictionaryGroupSchema = new Schema({
   name: {
-    type: String,
+    type: String
   },
   code: {
-    type: String,
+    type: String
   },
   order: {
-    type: Number,
+    type: Number
   },
   isSystem: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isDeleted: {
     type: Boolean,
-    default: false,
+    default: false
   },
   remark: {
-    type: String,
+    type: String
   },
   createdAt: {
     type: Date,
@@ -35,7 +35,8 @@ const DictionaryGroupSchema = new Schema({
   updatedBy: {
     type: Schema.Types.ObjectId,
     ref: 'user'
-  },
+  }
 });
 
-export const DictionaryGroup: Model<DictionaryGroupModelSchema> = models['dictionarygroup'] || model('dictionarygroup', DictionaryGroupSchema);
+export const DictionaryGroup: Model<DictionaryGroupModelSchema> =
+  models['dictionarygroup'] || model('dictionarygroup', DictionaryGroupSchema);

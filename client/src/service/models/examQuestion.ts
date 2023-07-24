@@ -34,7 +34,7 @@ const ExamQuestionSchema = new Schema({
     default: () => new Date()
   },
   updatedAt: {
-    type: Date,
+    type: Date
   },
   createdBy: {
     type: Schema.Types.ObjectId,

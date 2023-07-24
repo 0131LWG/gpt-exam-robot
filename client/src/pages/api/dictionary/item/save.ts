@@ -6,7 +6,7 @@ import { authUser } from '@/service/utils/auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   try {
-    const { _id, name, code, order, remark, parentId, isEnable,groupCode } = req.body as {
+    const { _id, name, code, order, remark, parentId, isEnable, groupCode } = req.body as {
       _id: string;
       name: string;
       code: string;
@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     // 凭证校验
     const { userId } = await authUser({ req, authToken: true });
-    console.log(userId, 'userId---------------111111111111111111111')
+    console.log(userId, 'userId---------------111111111111111111111');
     await connectToDatabase();
     let response: any = null;
     if (_id) {

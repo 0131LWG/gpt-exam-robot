@@ -2,19 +2,19 @@ import { Schema, model, models, Model } from 'mongoose';
 import { DictionaryItemModelSchema } from '@/types/mongoSchema';
 const DictionaryItemSchema = new Schema({
   name: {
-    type: String,
+    type: String
   },
   code: {
-    type: String,
+    type: String
   },
   order: {
-    type: Number,
+    type: Number
   },
   remark: {
-    type: String,
+    type: String
   },
   parentId: {
-    type: String,
+    type: String
   },
   isEnable: {
     type: Boolean,
@@ -24,13 +24,13 @@ const DictionaryItemSchema = new Schema({
     type: Boolean,
     default: true
   },
-  isDeleted:{
+  isDeleted: {
     type: Boolean,
-    default: false,
+    default: false
   },
   groupCode: {
     type: String,
-    required: true,
+    required: true
   },
   createdAt: {
     type: Date,
@@ -46,7 +46,8 @@ const DictionaryItemSchema = new Schema({
   updatedBy: {
     type: Schema.Types.ObjectId,
     ref: 'user'
-  },
+  }
 });
 
-export const DictionaryItem: Model<DictionaryItemModelSchema> = models['dictionaryitem'] || model('dictionaryitem', DictionaryItemSchema);
+export const DictionaryItem: Model<DictionaryItemModelSchema> =
+  models['dictionaryitem'] || model('dictionaryitem', DictionaryItemSchema);

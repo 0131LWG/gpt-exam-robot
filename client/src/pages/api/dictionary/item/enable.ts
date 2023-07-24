@@ -6,15 +6,15 @@ import { authUser } from '@/service/utils/auth';
 /* 禁用字典项和启用字典字典项 */
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   try {
-    const { _id, isEnable } = req.body as { _id: string, isEnable: boolean };
+    const { _id, isEnable } = req.body as { _id: string; isEnable: boolean };
 
     if (!_id) {
       throw new Error('参数错误');
     }
 
     // 凭证校验
-    await authUser({req, authToken: true});
-    
+    await authUser({ req, authToken: true });
+
     await connectToDatabase();
 
     // 删除字典分组
@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       {
         _id,
         isEnable: !isEnable
-      }, 
+      },
       {
         isEnable
       }

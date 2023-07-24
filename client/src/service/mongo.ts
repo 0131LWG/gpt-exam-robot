@@ -68,7 +68,6 @@ export * from './models/inform';
 export * from './models/system';
 export * from './models/image';
 
-
 export * from './models/dictionaryGroup';
 export * from './models/dictionaryItem';
 export * from './models/examQuestion';
