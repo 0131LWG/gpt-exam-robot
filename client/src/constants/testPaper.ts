@@ -1,3 +1,1 @@
-export interface TestPaperHistoryListResponse {
-  
-}
+export interface TestPaperHistoryListResponse {}

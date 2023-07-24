@@ -7,19 +7,17 @@ import _ from 'lodash';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   try {
-    const {
-      name,
-      level,
-      categoryId,
-      themeChoices
-    } = req.body as {
+    const { name, level, categoryId, themeChoices } = req.body as {
       name: string;
       level: string;
       categoryId: string;
       themeChoices: [];
     };
 
-    console.log(themeChoices, 'themeChoices----------------------------------------------------------------');
+    console.log(
+      themeChoices,
+      'themeChoices----------------------------------------------------------------'
+    );
     // 凭证校验
     const { userId } = await authUser({ req, authToken: true });
 
@@ -39,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     const questionList: any[] = [];
 
-    const promiseList: any[] = []
+    const promiseList: any[] = [];
     themeChoices.forEach((item) => {
       const requestPromise = ExamQuestion.find(
         {
@@ -58,18 +56,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       questionList.push(...temp);
     });
 
-    console.log(questionList, '-----questionList-----===================================11111111111111111')
+    console.log(
+      questionList,
+      '-----questionList-----===================================11111111111111111'
+    );
     const questionListObject = questionList.map((item) => {
-      console.log(item, '================================ item', item._id)
+      console.log(item, '================================ item', item._id);
       return {
-        questionId:item._id,
+        questionId: item._id,
         paperId: response._id
-      }
+      };
     });
-    console.log(questionListObject, '-----questionList-----===================================22222222222222222')
+    console.log(
+      questionListObject,
+      '-----questionList-----===================================22222222222222222'
+    );
     ExamAnswer.insertMany(questionListObject, function (error, result) {
       console.log(error, result, 'error-result');
-      if(error == null) {
+      if (error == null) {
         jsonRes(res, {
           data: response._id
         });

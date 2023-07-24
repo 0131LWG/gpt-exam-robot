@@ -1,24 +1,29 @@
-import React, { ReactNode, Key }  from 'react';
+import React, { ReactNode, Key } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Box } from '@chakra-ui/react';
-import type { TableContainerProps, TableProps, TableHeadProps, TableBodyProps } from '@chakra-ui/react';
+import type {
+  TableContainerProps,
+  TableProps,
+  TableHeadProps,
+  TableBodyProps
+} from '@chakra-ui/react';
 
 type DataType<T> = {
   [key: string]: ReactNode;
 } & T;
 
 export interface Props<T> {
-  tableContainer?: TableContainerProps,
-  table?: TableProps,
-  tHead?: TableHeadProps, 
-  tBody?: TableBodyProps,
-  columns: ColumnPops<T>[],
-  data: DataType<T>[],
-  rowKey?: keyof T
+  tableContainer?: TableContainerProps;
+  table?: TableProps;
+  tHead?: TableHeadProps;
+  tBody?: TableBodyProps;
+  columns: ColumnPops<T>[];
+  data: DataType<T>[];
+  rowKey?: keyof T;
 }
 
 export interface ColumnPops<T> {
-  title: string,
-  dataIndex: keyof T
+  title: string;
+  dataIndex: keyof T;
 }
 
 const ChakraTable: <T>(props: Props<T>) => JSX.Element = (props) => {
@@ -28,7 +33,9 @@ const ChakraTable: <T>(props: Props<T>) => JSX.Element = (props) => {
       <Table {...table}>
         <Thead {...tHead}>
           <Tr>
-            {columns.map((item) => (<Th key={item.dataIndex as Key}>{item.title}</Th>))}
+            {columns.map((item) => (
+              <Th key={item.dataIndex as Key}>{item.title}</Th>
+            ))}
           </Tr>
         </Thead>
         <Tbody {...tBody}>
@@ -41,9 +48,8 @@ const ChakraTable: <T>(props: Props<T>) => JSX.Element = (props) => {
           ))}
         </Tbody>
       </Table>
-    </TableContainer>  
-  )
-}
-
+    </TableContainer>
+  );
+};
 
 export default ChakraTable;

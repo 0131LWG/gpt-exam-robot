@@ -6,7 +6,15 @@ import { authUser } from '@/service/utils/auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   try {
-    const { _id, name, code, order, remark, isSystem = false, parentId  } = req.body as {
+    const {
+      _id,
+      name,
+      code,
+      order,
+      remark,
+      isSystem = false,
+      parentId
+    } = req.body as {
       _id: string;
       name: string;
       code: string;
@@ -23,39 +31,41 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     let response: any = null;
     if (_id) {
       // update
-      response = await DictionaryGroup.updateOne({
-        _id
-      },{
-        name,
-        code,
-        order,
-        remark,
-        isSystem,
-        updatedBy: userId,
-        parentId,
-        updatedAt: new Date(),
-      });
-      jsonRes(res, {
-        data: response._id
-      });
-    } else
-      {
-        // create
-        response = await DictionaryGroup.create({
+      response = await DictionaryGroup.updateOne(
+        {
+          _id
+        },
+        {
           name,
           code,
           order,
           remark,
           isSystem,
-          isDeleted: false,
-          createdAt: new Date(),
-          createdBy: userId,
+          updatedBy: userId,
           parentId,
-        });
-        jsonRes(res, {
-          data: response._id
-        });
-      }
+          updatedAt: new Date()
+        }
+      );
+      jsonRes(res, {
+        data: response._id
+      });
+    } else {
+      // create
+      response = await DictionaryGroup.create({
+        name,
+        code,
+        order,
+        remark,
+        isSystem,
+        isDeleted: false,
+        createdAt: new Date(),
+        createdBy: userId,
+        parentId
+      });
+      jsonRes(res, {
+        data: response._id
+      });
+    }
   } catch (err) {
     jsonRes(res, {
       code: 500,

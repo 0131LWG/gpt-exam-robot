@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     }
 
     // 凭证校验
-    await authUser({ req, authToken: true});
+    await authUser({ req, authToken: true });
 
     await connectToDatabase();
 

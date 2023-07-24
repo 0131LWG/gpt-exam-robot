@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     await connectToDatabase();
 
-    let where: any = {isDeleted: false};
+    let where: any = { isDeleted: false };
     if (keyword) {
       where = {
         ...where,
@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       where = {
         ...where,
         groupCode
-      }
+      };
     }
     const data = await DictionaryItem.find(where, '_id name code parentId isEnable order remark')
       .limit(pageSize)

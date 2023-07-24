@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // const { userId } = await authUser({ req, authToken: true });
 
     await connectToDatabase();
-    console.log(keyword, "111111")
+    console.log(keyword, '111111');
     let where = {};
     if (keyword) {
       where = {

@@ -164,11 +164,10 @@ export interface informSchema {
   read: boolean;
 }
 
-
 /**
  * 基础公共数据模型
  */
- interface BaseModel {
+interface BaseModel {
   isDelete: boolean;
   createdAt: Date;
   updatedAt: Date;

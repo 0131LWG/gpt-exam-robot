@@ -14,14 +14,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     // 凭证校验
     const { userId } = await authUser({ req, authToken: true });
-    
+
     await connectToDatabase();
 
     // 删除字典分组
     await DictionaryItem.updateOne(
       {
         _id
-      }, 
+      },
       {
         isDeleted: true
       }
