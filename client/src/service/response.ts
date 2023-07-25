@@ -21,12 +21,9 @@ export const jsonRes = <T = any>(
     message?: string;
     data?: T;
     error?: any;
-    pageNum?: number;
-    pageSize?: number;
-    total?: number;
   }
 ) => {
-  const { code = 200, message = '', data = null, error, pageNum, pageSize, total } = props || {};
+  const { code = 200, message = '', data = null, error } = props || {};
 
   const errResponseKey = typeof error === 'string' ? error : error?.message;
   // Specified error
@@ -70,21 +67,6 @@ export const jsonRes = <T = any>(
       pageNum: pageNum
     };
   }
-
-  if (pageSize) {
-    jsonData = {
-      ...jsonData,
-      pageSize: pageSize
-    };
-  }
-
-  if (pageSize) {
-    jsonData = {
-      ...jsonData,
-      total: total
-    };
-  }
-
   res.json({
     ...jsonData
   });
