@@ -19,10 +19,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       'themeChoices----------------------------------------------------------------'
     );
 
-    const themeList: any = []
-    themeChoices.forEach(theme => {
-      themeList.push({_id: theme})
-    })
+    const themeList: any = [];
+    themeChoices.forEach((theme) => {
+      themeList.push({ _id: theme });
+    });
 
     console.log(
       themeList,
