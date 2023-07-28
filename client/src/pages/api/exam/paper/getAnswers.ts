@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { jsonRes } from '@/service/response';
-import { connectToDatabase, ExamAnswer, ExamPaper } from '@/service/mongo';
+import { connectToDatabase, ExamAnswer, ExamPaper, ExamQuestion } from '@/service/mongo';
 import { authUser } from '@/service/utils/auth';
 import _ from 'lodash';
 
@@ -30,11 +30,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       paperId
     });
 
+    let ids = answers.map((item) => item.questionId);
+    const questionList = await ExamQuestion.find({ _id: { $in: ids } });
+
+    const newAnswers: any = [];
+    answers.forEach((item: any) => {
+      const current: any = questionList.find(
+        (question) => question._id.toString() === item.questionId.toString()
+      );
+      item.question = current.question;
+      newAnswers.push({
+        _id: item._id,
+        question: item.question,
+        answerContent: item.answerContent,
+        createdAt: item.createdAt,
+        gptContent: item.gptContent,
+        isDeleted: item.isDeleted,
+        paperId: item.paperId,
+        questionId: item.questionId,
+        score: item.score
+      });
+    });
+
     jsonRes<any>(res, {
       data: {
         data: {
           paperInfo: data,
-          answerList: answers
+          answerList: newAnswers
         }
       }
     });
