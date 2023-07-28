@@ -32,8 +32,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     jsonRes<any>(res, {
       data: {
-        paperInfo: data,
-        answerList: answers
+        data: {
+          paperInfo: data,
+          answerList: answers
+        }
       }
     });
   } catch (err) {
