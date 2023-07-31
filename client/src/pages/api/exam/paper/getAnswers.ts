@@ -7,9 +7,7 @@ import _ from 'lodash';
 /* 答题考卷列表 */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const {
-      paperId
-    } = req.body as {
+    const { paperId } = req.body as {
       paperId: string;
     };
 
@@ -17,27 +15,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     await connectToDatabase();
 
-    if(!paperId) {
+    if (!paperId) {
       throw new Error('参数错误');
     }
 
     const data = await ExamPaper.find(
       {
         paperId
-      }, '_id name level categoryId themeChoices score remark')
+      },
+      '_id name level categoryId themeChoices score remark'
+    );
 
     const answers = await ExamAnswer.find({
       paperId
-    })
-
-    jsonRes<any>(res, {
-       data: {
-        paperInfo: data,
-        answerList: answers
-       }
-
     });
 
+    jsonRes<any>(res, {
+      data: {
+        paperInfo: data,
+        answerList: answers
+      }
+    });
   } catch (err) {
     jsonRes(res, {
       code: 500,
